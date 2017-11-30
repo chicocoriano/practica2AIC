@@ -132,7 +132,7 @@ end_prg move    #9,d0
 * DATOS DEL PROGRAMA PRINCIPAL
 **********************************************
 * Variable que indica cuántos ciclos durará la simulación
-ciclos  dc.l    1000
+ciclos  dc.l    2000
 
 
 **********************************************
@@ -163,6 +163,8 @@ RTI1
         move.l  cont1,d0
         addi.l  #1,d0
         move.l  d0, cont1
+*Encender el led 1
+        move.b  #%00000010,$E00010        
 * Restaurar registros y retornar
         movem.l (a7)+,d0/a1
         rte
@@ -186,7 +188,7 @@ RTI2
 * Numero de veces que se contara esta interrupcion
         move.l  cont2,d0
         addi.l  #1,d0
-        move.l  d0, cont2
+        move.l  d0, cont2               
 * Restaurar registros y retornar
         movem.l (a7)+,d0/a1
         rte
@@ -236,7 +238,7 @@ RTI4
 * Numero de veces que se contara esta interrupcion
         move.l  cont4,d0
         addi.l  #1,d0
-        move.l  d0, cont4
+        move.l  d0, cont4 
 * Restaurar registros y retornar
         movem.l (a7)+,d0/a1
         rte
@@ -284,8 +286,7 @@ RTI6
 * Numero de veces que se contara esta interrupcion
         move.l  cont6,d0
         addi.l  #1,d0
-        move.l  d0, cont6
-       
+        move.l  d0, cont6       
 * Restaurar registros y retornar
         movem.l (a7)+,d0/a1
         rte
@@ -309,7 +310,7 @@ RTI7
 * Numero de veces que se contara esta interrupcion
         move.l  cont7,d0
         addi.l  #1,d0
-        move.l  d0, cont7
+        move.l  d0, cont7       
 * Restaurar registros y retornar
         movem.l (a7)+,d0/a1
         rte
@@ -323,6 +324,8 @@ RTI7
 LF      equ     10
 CR      equ     13
 NULL    equ     0
+LEDES   equ     $E00010
+
 str_int1
         dc.b    'INT 1',NULL
 str_int2
@@ -371,6 +374,9 @@ CADENA7
         dc.b    'Numero de veces que se ha llamado a la interrupcion 7 es ', NULL
 
         end     start_prg
+
+
+
 
 
 
